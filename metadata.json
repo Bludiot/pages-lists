@@ -1,10 +1,12 @@
 {
-	"author"      : "Bludiot",
-	"email"       : "",
-	"website"     : "https://github.com/Bludiot/pages-lists",
-	"version"     : "1.0.0",
-	"releaseDate" : "",
-	"license"     : "",
-	"compatible"  : "3.15.0",
-	"notes"       : ""
+	"author"       : "Bludiot",
+	"email"        : "",
+	"website"      : "https://github.com/Bludiot/pages-lists",
+	"version"      : "1.0.0",
+	"releaseDate"  : "",
+	"license"      : "",
+	"compatible"   : "3.16.0",
+	"notes"        : "",
+	"theme_desc"   : "The Pages Lists plugin improves upon the default Bludit static pages plugin with many display options for the site sidebar. Individual pages may be selected for the list. The active theme may also add pages to the 404 error page.",
+	"theme_compat" : [ "configureight" ]
 }
