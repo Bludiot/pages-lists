@@ -208,6 +208,30 @@ class Pages_Lists extends Plugin {
 	}
 
 	/**
+	 * Head section
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return string Returns the head content.
+	 */
+	public function adminBodyEnd() {
+
+		// Access global variables.
+		global $L, $url;
+
+		// Settings page URL.
+		$settings = DOMAIN_ADMIN . 'configure-plugin/' . $this->className() . '#options';
+
+		if ( checkRole( [ 'admin' ], false ) && 'content' == $url->slug() ) {
+			return sprintf(
+				'<script>$( ".nav-tabs" ).before( "<div class=\'alert alert-primary alert-search-forms\' role=\'alert\'><p class=\'m-0\'><a href=\'%s\'>%s</a></p></div>");</script>',
+				$settings,
+				$L->get( 'Pages widget options' )
+			);
+		}
+	}
+
+	/**
 	 * Admin info pages
 	 *
 	 * @since  1.0.0
