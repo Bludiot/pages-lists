@@ -47,6 +47,7 @@ $defaults = [
 	'wrap'       => false,
 	'wrap_class' => 'list-wrap pages-list-wrap',
 	'direction'  => 'vert', // horz or vert
+	'separator'  => false, // false or string
 	'list_class' => 'pages-list standard-content-list',
 	'label'      => false,
 	'label_el'   => 'h2',
