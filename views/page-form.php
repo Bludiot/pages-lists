@@ -40,7 +40,7 @@ $guide_page = DOMAIN_ADMIN . 'plugin/' . $this->className();
 	<div class="form-field form-group row">
 		<label class="form-label col-sm-2 col-form-label" for="in_sidebar"><?php echo ucwords( $L->get( 'Sidebar List' ) ); ?></label>
 		<div class="col-sm-10">
-			<select class="form-select" id="in_sidebar" name="in_sidebar">
+			<select id="in_sidebar" class="form-select" name="in_sidebar">
 				<option value="true" <?php echo ( $this->getValue( 'in_sidebar' ) === true ? 'selected' : '' ); ?>><?php $L->p( 'Enabled' ); ?></option>
 
 				<option value="false" <?php echo ( $this->getValue( 'in_sidebar' ) === false ? 'selected' : '' ); ?>><?php $L->p( 'Disabled' ); ?></option>
@@ -87,7 +87,7 @@ $guide_page = DOMAIN_ADMIN . 'plugin/' . $this->className();
 		<div id="separator-wrap" class="form-field form-group row" style="display: <?php echo ( $this->getValue( 'list_view' ) === 'horz' ? 'flex' : 'none' ); ?>;">
 			<label class="form-label col-sm-2 col-form-label" for="separator"><?php echo ucwords( $L->get( 'Pages Separator' ) ); ?></label>
 			<div class="col-sm-10">
-				<select class="form-select" id="separator" name="separator">
+				<select id="separator" class="form-select" name="separator">
 					<option value="true" <?php echo ( $this->getValue( 'separator' ) === true ? 'selected' : '' ); ?>><?php $L->p( 'Enabled' ); ?></option>
 
 					<option value="false" <?php echo ( $this->getValue( 'separator' ) === false ? 'selected' : '' ); ?>><?php $L->p( 'Disabled' ); ?></option>
