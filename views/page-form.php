@@ -11,6 +11,9 @@
 // Get static pages, not posts.
 $static = buildStaticPages();
 
+// Guide page URL.
+$guide_page = DOMAIN_ADMIN . 'plugin/' . $this->className();
+
 ?>
 <style>
 .form-control-has-button {
@@ -27,6 +30,9 @@ $static = buildStaticPages();
 	margin-top: 1rem;
 }
 </style>
+<div class="alert alert-primary alert-pages-lists" role="alert">
+	<p class="m-0"><?php $L->p( "Go to the <a href='{$guide_page}'>pages lists guide</a> page." ); ?></p>
+</div>
 
 <fieldset class="mt-4">
 	<legend class="screen-reader-text mb-3"><?php $L->p( 'Sidebar List Options' ) ?></legend>
