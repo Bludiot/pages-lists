@@ -78,18 +78,30 @@ $static = buildStaticPages();
 			</div>
 		</div>
 
-		<div class="form-field form-group row">
-			<label class="form-label col-sm-2 col-form-label" for="pages_limit"><?php $L->p( 'List Limit' ); ?></label>
+		<div id="separator-wrap" class="form-field form-group row" style="display: <?php echo ( $this->getValue( 'list_view' ) === 'horz' ? 'flex' : 'none' ); ?>;">
+			<label class="form-label col-sm-2 col-form-label" for="separator"><?php echo ucwords( $L->get( 'Pages Separator' ) ); ?></label>
 			<div class="col-sm-10">
-				<select id="pages_limit" class="form-select" name="pages_limit">
-					<option value="al" <?php echo ( $this->getValue( 'pages_limit' ) === 'all' ? 'selected' : '' ); ?>><?php $L->p( 'All Pages' ); ?></option>
-					<option value="select" <?php echo ( $this->getValue( 'pages_limit' ) === 'select' ? 'selected' : '' ); ?>><?php $L->p( 'Select Pages' ); ?></option>
+				<select class="form-select" id="separator" name="separator">
+					<option value="true" <?php echo ( $this->getValue( 'separator' ) === true ? 'selected' : '' ); ?>><?php $L->p( 'Enabled' ); ?></option>
+
+					<option value="false" <?php echo ( $this->getValue( 'separator' ) === false ? 'selected' : '' ); ?>><?php $L->p( 'Disabled' ); ?></option>
+				</select>
+				<small class="form-text"><?php $L->p( 'Separate pages with a pipe ( | ) character in the horizontal list.' ); ?></small>
+			</div>
+		</div>
+
+		<div class="form-field form-group row">
+			<label class="form-label col-sm-2 col-form-label" for="pages_display"><?php $L->p( 'List Display' ); ?></label>
+			<div class="col-sm-10">
+				<select id="pages_display" class="form-select" name="pages_display">
+					<option value="al" <?php echo ( $this->getValue( 'pages_display' ) === 'all' ? 'selected' : '' ); ?>><?php $L->p( 'All Pages' ); ?></option>
+					<option value="select" <?php echo ( $this->getValue( 'pages_display' ) === 'select' ? 'selected' : '' ); ?>><?php $L->p( 'Select Pages' ); ?></option>
 				</select>
 				<small class="form-text text-muted"><?php $L->p( 'Pages to display in the list.' ); ?></small>
 			</div>
 		</div>
 
-		<div id="pages_select_wrap" class="form-field form-group row" style="display: <?php echo ( $this->getValue( 'pages_limit' ) === 'select' ? 'flex' : 'none' ); ?>;">
+		<div id="pages_select_wrap" class="form-field form-group row" style="display: <?php echo ( $this->getValue( 'pages_display' ) === 'select' ? 'flex' : 'none' ); ?>;">
 			<label class="form-label col-sm-2 col-form-label" for="pages_select"><?php $L->p( 'Select Pages' ); ?></label>
 
 			<?php if ( isset( $static[0] ) ) : ?>
@@ -173,7 +185,15 @@ jQuery(document).ready( function($) {
 			$( "#pages-lists-options" ).fadeOut( 250 );
 		}
 	});
-	$( '#pages_limit' ).on( 'change', function() {
+	$( '#list_view' ).on( 'change', function() {
+		var show = $(this).val();
+		if ( show == 'horz' ) {
+			$( "#separator-wrap" ).css( 'display', 'flex' );
+		} else {
+			$( "#separator-wrap" ).css( 'display', 'none' );
+		}
+	});
+	$( '#pages_display' ).on( 'change', function() {
 		var show = $(this).val();
 		if ( show == 'select' ) {
 			$( "#pages_select_wrap" ).css( 'display', 'flex' );

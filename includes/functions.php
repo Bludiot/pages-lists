@@ -41,7 +41,8 @@ function pages_list( $args = null, $defaults = [] ) {
 		'list_class' => 'pages-list standard-content-list',
 		'label'      => false,
 		'label_el'   => 'h2',
-		'links'      => true
+		'links'      => true,
+		'separator'  => false
 	];
 
 	// Maybe override defaults.
@@ -85,23 +86,40 @@ function pages_list( $args = null, $defaults = [] ) {
 	// Conditional source of the pages to list.
 	$static = buildStaticPages();
 	$select = false;
-	if ( 'plugin' == $args['source'] && 'select' == $plugin->pages_limit() ) {
+	if ( 'plugin' == $args['source'] && 'select' == $plugin->pages_display() ) {
 		$static = $plugin->pages_select();
 		$select = true;
 	}
 
+	$last = end( $static );
 	foreach ( $static as $page ) {
 
+		// Skip the `home` page key.
 		if ( $page == 'home' ) {
 			continue;
 		}
 
+		// Build page from manual selection.
 		if ( $select ) {
 			$page = buildPage( $page );
 		}
 
+		// Skip 404 page.
 		if ( $page->key() == $site->pageNotFound() ) {
 			continue;
+		}
+
+		// Pages separator.
+		$sep = null;
+		if ( is_string( $args['separator'] ) && 'horz' == $args['direction'] ) {
+			$sep = $args['separator'];
+
+			// No separator after the last page.
+			if ( $select && $page->key() == $last ) {
+				$sep = null;
+			} elseif ( $page == $last ) {
+				$sep = null;
+			}
 		}
 
 		// Item class.
@@ -121,14 +139,13 @@ function pages_list( $args = null, $defaults = [] ) {
 		if ( $args['links'] ) {
 			$html .= '</a>';
 		}
-		$html .= '</li>';
+		$html .= '</li>' . $sep;
 	}
 	$html .= '</ul>';
 
 	if ( $args['wrap'] ) {
 		$html .= '</div>';
 	}
-
 	return $html;
 }
 
@@ -153,7 +170,7 @@ function sidebar_list() {
 		'wrap_class' => 'list-wrap pages-list-wrap-wrap plugin plugin-pages-list'
 	];
 
-	if ( 'select' == $plugin->pages_limit() ) {
+	if ( 'select' == $plugin->pages_display() ) {
 		$args['source'] = 'plugin';
 	}
 
@@ -165,6 +182,9 @@ function sidebar_list() {
 
 	if ( 'horz' == $plugin->list_view() ) {
 		$args['direction'] = 'horz';
+		if ( $plugin->separator() ) {
+			$args['separator'] = ' | ';
+		}
 	}
 
 	// Return a modified list.

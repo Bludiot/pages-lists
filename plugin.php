@@ -84,12 +84,13 @@ class Pages_Lists extends Plugin {
 		global $L;
 
 		$this->dbFields = [
-			'in_sidebar'   => true,
-			'label'        => $L->get( 'Pages' ),
-			'label_wrap'   => 'h2',
-			'list_view'    => 'vert', // vert or horz
-			'pages_limit'  => 'all',
-			'pages_select' => [ '' ]
+			'in_sidebar'    => true,
+			'label'         => $L->get( 'Pages' ),
+			'label_wrap'    => 'h2',
+			'list_view'     => 'vert', // vert or horz
+			'pages_display' => 'all',
+			'pages_select'  => [ '' ],
+			'separator'     => true
 		];
 
 		if ( ! $this->installed() ) {
@@ -312,12 +313,17 @@ class Pages_Lists extends Plugin {
 	}
 
 	// @return string
-	public function pages_limit() {
-		return $this->getValue( 'pages_limit' );
+	public function pages_display() {
+		return $this->getValue( 'pages_display' );
 	}
 
 	// @return array
 	public function pages_select() {
 		return $this->getValue( 'pages_select' );
+	}
+
+	// @return boolean
+	public function separator() {
+		return $this->getValue( 'separator' );
 	}
 }
